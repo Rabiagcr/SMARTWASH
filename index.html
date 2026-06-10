@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Makine 03 - SmartWash</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { cyber: { blue: '#00f2ff', dark: '#0a0f16' } },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['Fira Code', 'monospace'] }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;600;700&display=swap');
+        
+        body { 
+            background-color: #05080f; color: #e2e8f0; 
+            margin: 0; min-height: 100vh; 
+            background-image: radial-gradient(circle at 50% 50%, rgba(0, 242, 255, 0.08) 0%, transparent 60%);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+        }
+        .glass-panel { background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .hidden-step { display: none !important; }
+        .fade-in { animation: fadeIn 0.4s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+    </style>
+</head>
+<body class="font-sans antialiased p-4 relative overflow-hidden">
+
+    <div class="absolute top-0 w-full p-6 flex justify-between items-center z-50">
+        <div class="flex items-center gap-2">
+            <i class="fa-solid fa-shield-halved text-cyber-blue text-xl"></i>
+            <h1 class="text-lg font-bold tracking-widest text-white">SMART<span class="text-cyber-blue">WASH</span></h1>
+        </div>
+        <div class="text-xs font-mono text-gray-400 bg-gray-900/50 px-3 py-1.5 rounded-lg border border-gray-700">
+            ID: USR-8824
+        </div>
+    </div>
+
+    <div id="step-1" class="w-full max-w-sm glass-panel p-8 rounded-3xl shadow-[0_0_40px_rgba(0,242,255,0.2)] fade-in z-10 text-center">
+        <div class="w-20 h-20 bg-green-500/20 text-green-400 rounded-full flex items-center justify-center mx-auto mb-6 border-2 border-green-500 shadow-[0_0_20px_rgba(34,197,94,0.4)]">
+            <i class="fa-solid fa-check text-4xl"></i>
+        </div>
+        <h2 class="text-2xl font-bold text-white mb-2">Donanım Eşleşti</h2>
+        <p class="text-sm text-gray-400 mb-6">Makine 03'ü başarıyla ayırdınız. Cihaz başkalarına kapatıldı.</p>
+        
+        <div class="bg-black/40 p-4 rounded-xl border border-white/5 mb-8">
+            <p class="text-gray-500 text-[10px] uppercase tracking-widest mb-1">Bağlantı Şifresi</p>
+            <p class="text-cyber-blue font-mono font-bold tracking-widest text-lg">M03-SECURE-LINK</p>
+        </div>
+
+        <button onclick="nextStep('step-2')" class="w-full bg-cyber-blue hover:bg-cyan-300 text-black font-bold text-lg py-4 rounded-xl shadow-[0_0_20px_rgba(0,242,255,0.4)] transition transform hover:scale-105 active:scale-95 flex justify-center items-center gap-3">
+            <i class="fa-solid fa-play"></i> Yıkamayı Başlat
+        </button>
+    </div>
+
+    <div id="step-2" class="w-full max-w-sm hidden-step flex flex-col items-center z-10 fade-in w-full">
+        <div class="w-28 h-28 rounded-full bg-cyber-blue/10 border-2 border-cyber-blue flex items-center justify-center mb-6 shadow-[0_0_50px_rgba(0,242,255,0.4)] animate-pulse">
+            <i class="fa-solid fa-lock text-5xl text-cyber-blue"></i>
+        </div>
+        
+        <h2 class="text-3xl font-bold text-white mb-8 text-center tracking-widest">MAKİNE 03</h2>
+        
+        <div class="w-full glass-panel rounded-3xl p-8 mb-8 border-t-4 border-cyber-blue text-center relative overflow-hidden">
+            <p class="text-gray-400 text-sm mb-4 uppercase tracking-widest font-bold">Kalan Süre</p>
+            <h1 class="text-7xl font-bold text-white font-mono mb-6 drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">45:00</h1>
+            <div class="w-full bg-gray-800 rounded-full h-3 mb-3"><div class="bg-cyber-blue h-3 rounded-full" style="width: 5%"></div></div>
+            <p class="text-sm text-cyber-blue text-right font-bold flex justify-end items-center gap-2">
+                <i class="fa-solid fa-fan animate-spin"></i> Ön Yıkama
+            </p>
+        </div>
+
+        <button onclick="nextStep('step-3')" class="w-full bg-red-500/10 hover:bg-red-500/20 border border-red-500/50 text-red-400 font-bold text-lg py-4 rounded-xl transition flex justify-center items-center gap-3">
+            <i class="fa-solid fa-forward-step"></i> Süreyi Bitir (Demo)
+        </button>
+    </div>
+
+    <div id="step-3" class="w-full max-w-sm hidden-step z-10 fade-in w-full">
+        <div class="glass-panel rounded-3xl p-8 border-t-4 border-red-500 text-center relative overflow-hidden shadow-[0_0_50px_rgba(239,68,68,0.2)]">
+            <i class="fa-solid fa-gavel text-6xl text-red-500 mb-6 drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]"></i>
+            <h2 class="text-2xl font-bold text-white mb-2">Gölge Ban Aktif</h2>
+            <p class="text-red-400 font-bold mb-6 text-sm">Süre Bitti: Çamaşırlar Alınmadı</p>
+            
+            <div class="bg-red-500/10 border border-red-500/20 rounded-xl p-4 text-left">
+                <p class="text-gray-300 text-sm leading-relaxed">
+                    Sistem kayıtlarına göre makineyi süresi bitmesine rağmen işgal etmeye devam ettiniz. 
+                    Bu sebeple hesabınıza <strong>3 gün</strong> boyunca yoğun saatlerde rezervasyon yapma kısıtlaması (Shadow Ban) getirilmiştir.
+                </p>
+            </div>
+            
+            <div class="mt-6 pt-6 border-t border-white/5 flex justify-between items-center">
+                <span class="text-gray-400 text-sm font-bold">Yeni Karma Puanı:</span>
+                <span class="text-2xl font-bold text-white">90 <i class="fa-solid fa-star text-yellow-400"></i></span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function nextStep(stepId) {
+            document.getElementById('step-1').classList.add('hidden-step');
+            document.getElementById('step-2').classList.add('hidden-step');
+            document.getElementById('step-3').classList.add('hidden-step');
+            
+            const nextEl = document.getElementById(stepId);
+            nextEl.classList.remove('hidden-step');
+            
+            // Animasyonu tetiklemek için reflow hilesi
+            void nextEl.offsetWidth; 
+            nextEl.classList.add('fade-in');
+        }
+    </script>
+</body>
+</html>
